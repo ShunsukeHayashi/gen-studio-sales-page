@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google AI Studio活用「自律型記事作成AIエージェント」構築パッケージ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .shadow-glow {
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+        }
+        .check-list li {
+            position: relative;
+            padding-left: 1.5em;
+            margin-bottom: 0.8em;
+        }
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4f46e5;
+            font-weight: bold;
+        }
+        .cross-list li {
+            position: relative;
+            padding-left: 1.5em;
+            margin-bottom: 0.8em;
+        }
+        .cross-list li::before {
+            content: '✕';
+            position: absolute;
+            left: 0;
+            color: #ef4444;
+            font-weight: bold;
+        }
+        /* Teachable-like Button */
+        .btn-primary {
+            background-color: #ef4444; /* Strong Red for CTA */
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Hero Section -->
+    <section class="gradient-bg text-white pt-16 pb-20 px-4 text-center relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="w-full h-full">
+                <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
+            </svg>
+        </div>
+
+        <div class="max-w-4xl mx-auto relative z-10">
+            <p class="text-indigo-200 font-bold tracking-wider mb-4 uppercase text-sm md:text-base">
+                Google AI Studio活用「自律型記事作成AIエージェント」ツール利用権
+            </p>
+
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-6 drop-shadow-lg">
+                もう、あなたは<br>
+                記事を書かなくていい。
+            </h1>
+
+            <p class="text-xl md:text-2xl font-medium mb-8 text-indigo-100">
+                Google検索、執筆、画像生成…<br class="md:hidden">すべてを<span class="text-yellow-400 font-bold border-b-2 border-yellow-400">「自律的」</span>に行う<br>AI社員を雇いませんか？
+            </p>
+
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-10 mx-auto max-w-2xl border border-white/20">
+                <p class="text-sm md:text-lg leading-relaxed">
+                    ChatGPTへの指示出しに疲れたブログ運営者・マーケターへ。<br>
+                    最新のGoogle AI Studioを活用し、「指示待ち」ではない「自律型」エージェントをすぐに使えるツールとして提供する「完全利用権」。
+                </p>
+            </div>
+
+            <a href="#offer" class="btn-primary text-white font-bold py-4 px-8 rounded-full text-lg md:text-xl shadow-lg inline-block w-full md:w-auto">
+                今すぐツール利用権を手に入れる
+                <span class="block text-xs font-normal mt-1 opacity-90">※ローンチ限定価格で提供中</span>
+            </a>
+        </div>
+    </section>
+
+
+    <!-- 3. Pain Points -->
+    <section class="bg-gray-50 py-16 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-10 text-gray-800">
+                なぜ、あなたのブログ・メディア運営は<br>こんなに辛いのか？
+            </h2>
+
+            <div class="bg-white p-8 rounded-xl shadow-sm border-l-4 border-red-500 mb-8">
+                <p class="font-bold text-gray-700 mb-4">もしあなたが、既存のAIツールを使っているにも関わらず、こんな悩みを抱えているなら…</p>
+                <ul class="cross-list text-gray-600 space-y-3">
+                    <li>ChatGPTに書いてもらった記事が嘘ばかりで、結局ファクトチェックと手直しに時間がかかる。</li>
+                    <li>最新情報や具体的なデータを盛り込んだ記事が書けない（AIの知識が古い）。</li>
+                    <li>記事に合うアイキャッチ画像を探したり、生成AIで何度も作り直すのが面倒すぎる。</li>
+                    <li>SEO記事を量産したいのに、リサーチの段階で手が止まってしまう。</li>
+                </ul>
+            </div>
+
+            <div class="text-center">
+                <p class="text-lg font-bold text-gray-800 mb-2">結論：それは、あなたが使っているのが</p>
+                <p class="text-3xl font-black text-red-600 bg-red-100 inline-block px-4 py-2 rounded transform -rotate-1">「指示待ち型のチャットボット」</p>
+                <p class="text-lg font-bold text-gray-800 mt-2">だからです。</p>
+                <p class="mt-4 text-gray-600">あなたが毎回細かく指示を出さなければ、彼らは動きません。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. The Solution -->
+    <section class="bg-white py-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 text-indigo-900">
+                これからは「指示」ではなく、<br>「依頼」する時代へ。
+            </h2>
+            <p class="text-center text-gray-600 mb-12">Google AI Studioが可能にした「自律型エージェント(Agentic Workflow)」とは？</p>
+
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <!-- Old Way -->
+                <div class="bg-gray-100 p-6 rounded-lg border border-gray-200 opacity-70">
+                    <h3 class="text-xl font-bold text-gray-500 mb-4 text-center">従来のAIツール</h3>
+                    <div class="space-y-4 text-sm text-center">
+                        <div class="bg-white p-3 rounded shadow-sm">人間が詳細な指示</div>
+                        <div class="text-gray-400">↓</div>
+                        <div class="bg-white p-3 rounded shadow-sm">AIがテキスト生成</div>
+                        <div class="text-gray-400">↓</div>
+                        <div class="bg-white p-3 rounded shadow-sm border border-red-200">人間が修正・画像用意（手間！）</div>
+                        <div class="text-gray-400">↓</div>
+                        <div class="bg-gray-200 p-3 rounded text-gray-500">完成</div>
+                    </div>
+                </div>
+
+                <!-- New Way -->
+                <div class="bg-indigo-50 p-6 rounded-lg border-2 border-indigo-500 relative shadow-xl">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-indigo-600 text-white px-4 py-1 rounded-full text-sm font-bold">本商品（自律型）</div>
+                    <h3 class="text-xl font-bold text-indigo-700 mb-4 text-center">自律型エージェント</h3>
+                    <div class="space-y-4 text-sm text-center">
+                        <div class="bg-white p-3 rounded shadow-sm font-bold">人間がキーワードを「依頼」</div>
+                        <div class="text-indigo-500 font-bold">↓ これ以降、全自動</div>
+                        <div class="bg-white p-3 rounded shadow-sm border-l-4 border-indigo-500 flex flex-col gap-2">
+                            <span class="text-xs bg-indigo-100 text-indigo-800 py-1 px-2 rounded-full self-center">AIが自律思考</span>
+                            <span>🔍 Google検索・調査</span>
+                            <span>📝 構成・執筆</span>
+                            <span>🎨 画像生成・挿入</span>
+                        </div>
+                        <div class="text-indigo-500">↓</div>
+                        <div class="bg-indigo-600 text-white p-3 rounded font-bold shadow-md">高品質な記事が完成</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Benefits -->
+    <section class="bg-gray-900 text-white py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">
+                この「自律型エージェント」を導入することで、<br>あなたの作業はこう変わります。
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="flex items-start">
+                    <div class="text-3xl mr-4">✅</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 text-indigo-300">リサーチ時間ゼロへ</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">最新のニュース、統計データ、競合情報をAIが自らGoogle検索で収集。古い情報に基づく低品質な記事とは無縁になります。</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="text-3xl mr-4">✅</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 text-indigo-300">ファクトチェック済みの信頼性</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">検索結果をソースとして明示しながら執筆するため、嘘やハルシネーション（AIの幻覚）を極限まで抑制します。</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="text-3xl mr-4">✅</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 text-indigo-300">画像作成の呪縛から解放</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">記事の内容を理解し、文脈に完璧にマッチしたオリジナル画像をAIがその場で生成・挿入します。著作権フリー素材を探す時間はもう必要ありません。</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="text-3xl mr-4">✅</div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 text-indigo-300">SEO記事を「放置」で量産</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">あなたは寝る前にキーワードをいくつかセットするだけ。朝起きれば、投稿準備が整った記事が出来上がっています。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 bg-indigo-800/50 p-6 rounded-lg text-center border border-indigo-500/30">
+                <p class="text-lg font-bold text-yellow-300">⚠️ API利用コストについて</p>
+                <p class="text-sm text-gray-300 mt-2">記事生成や画像生成にかかるGoogle APIの利用料は、お客様ご自身の負担となります。<br>特に高性能な画像生成モデル（Nano Banana Pro等）を使用する場合、従量課金等の追加コストが発生することを予めご了承ください。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Offer Section -->
+    <section id="offer" class="py-20 px-4 bg-gradient-to-b from-gray-100 to-white">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 text-gray-800">
+                「最強のAI社員」に、今すぐアクセスできる<br>URLを提供します。
+            </h2>
+
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
+                <div class="bg-gray-800 text-white p-4 text-center font-bold tracking-widest text-sm">
+                    DIGITAL DOWNLOAD
+                </div>
+
+                <div class="p-8 md:p-12">
+                    <h3 class="text-2xl md:text-3xl font-black text-center text-gray-800 mb-2">
+                        自律型記事作成AIエージェント<br>ツール利用権
+                    </h3>
+                    <div class="w-16 h-1 bg-red-500 mx-auto mb-8"></div>
+
+                    <div class="space-y-6 mb-10">
+                        <div class="flex items-start">
+                            <span class="bg-indigo-100 text-indigo-700 font-bold px-3 py-1 rounded text-xs mt-1 shrink-0">ツール本体</span>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-lg">「自律型記事作成AIエージェント」ツールURL</h4>
+                                <p class="text-sm text-gray-600">ブラウザでアクセスするだけで起動する、完成済みのWebツール。面倒なインストールや環境構築は一切不要です。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center bg-gray-50 rounded-xl p-6 mb-8">
+                        <div class="flex items-end justify-center gap-2 text-gray-800">
+                            <span class="text-lg font-bold">価格</span>
+                            <span class="text-5xl font-black tracking-tight">30,000</span>
+                            <span class="text-xl font-bold">円(税込)</span>
+                        </div>
+                    </div>
+
+                    <a href="https://shuhayas-s-school.teachable.com/l/digital_download/960509/genstudio" class="btn-primary w-full block text-center text-white font-bold text-xl py-5 rounded-lg shadow-lg">
+                        ツール利用権を購入する
+                    </a>
+                    <p class="text-center text-xs text-gray-400 mt-4">🔒 SSL暗号化通信により、あなたの情報は安全に守られます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. FAQ -->
+    <section class="bg-gray-50 py-16 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold text-center mb-10 text-gray-800">
+                よくある質問にお答えします
+            </h2>
+            <div class="space-y-4">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-lg mb-2 flex items-start"><span class="text-indigo-600 mr-2">Q.</span> 難しい設定やインストールは必要ですか？</h3>
+                    <p class="text-gray-600 text-sm ml-6">A. いいえ、一切不要です。購入後に提供されるURLにアクセスするだけで、ブラウザ上ですぐにツールをご利用いただけます。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-lg mb-2 flex items-start"><span class="text-indigo-600 mr-2">Q.</span> 追加費用はかかりますか？</h3>
+                    <p class="text-gray-600 text-sm ml-6">A. はい、ツールの利用自体は買い切りですが、AIを動かすためのAPI費用（Google AI Studio等）はお客様の実費負担となります。特に高性能な画像生成（Nano Banana Pro等）を行う場合はAPI従量課金が発生しますので、ご自身でAPIキーを管理・運用してください。</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-lg mb-2 flex items-start"><span class="text-indigo-600 mr-2">Q.</span> 生成された記事の著作権はどうなりますか？</h3>
+                    <p class="text-gray-600 text-sm ml-6">A. 生成された記事や画像の著作権は、基本的に利用者に帰属します。ご自身のブログやメディアで自由にご利用いただけます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. P.S. Footer -->
+    <section class="bg-white pt-16 pb-24 px-4 border-t border-gray-200">
+        <div class="max-w-3xl mx-auto">
+            <h3 class="font-bold text-xl mb-4">追伸：</h3>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+                ここまでお読みいただきありがとうございます。<br>
+                AI技術の進化は速く、半年後にはこのツールも「当たり前」になっているかもしれません。しかし、重要なのは「誰よりも早く導入し、先行者利益を得ること」です。<br><br>
+                ライバルたちがまだChatGPTにちまちまと指示を出している間に、あなたはこの自律型エージェントを使って、高品質なコンテンツを量産体制に乗せてください。<br><br>
+                あなたのメディア運営が劇的に楽になることを約束します。講座の中でお会いしましょう。
+            </p>
+
+            <a href="#offer" class="btn-primary block w-full md:w-2/3 mx-auto text-center text-white font-bold py-4 rounded-lg shadow-lg">
+                今すぐ申し込む
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
+        <div class="max-w-6xl mx-auto px-4">
+            <p>&copy; 2025 AI Automation Academy. All Rights Reserved.</p>
+            <div class="mt-2 space-x-4">
+                <a href="#" class="hover:text-white">特定商取引法に基づく表記</a>
+                <a href="#" class="hover:text-white">プライバシーポリシー</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
